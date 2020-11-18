@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.w3.org/1999/xhtml" layout:decorate="~{layouts/main}" lang="ru">
+<head>
+    <title th:utext="${viewer.getTitle()}"/>
+</head>
+<body>
+<div layout:fragment="body">
+    <div class="row">
+        <div class="col-7" th:insert="layouts/list :: list"></div>
+
+        <div class="col" th:insert="layouts/info :: info(~{:: .fields}, ('/' + ${name} + '/add'))">
+            <div class="fields">
+                <div th:replace="layouts/info :: name-field"></div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
