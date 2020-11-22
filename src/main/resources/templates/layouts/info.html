@@ -21,7 +21,7 @@
 </div>
 <div th:fragment="field(label, name, value)" class="form-group">
     <label for="name" th:utext="${label}" />
-    <input type="text" class="form-control" th:value="${value}" th:id="${name}" th:name="&{name}">
+    <input type="text" class="form-control" th:value="${value}" th:id="${name}" th:name="${name}">
 </div>
 </body>
 </html>

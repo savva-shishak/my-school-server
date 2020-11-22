@@ -4,6 +4,7 @@ import com.example.demo.groups.Group;
 import com.example.demo.groups.GroupsRepos;
 import com.example.demo.rooms.Room;
 import com.example.demo.rooms.RoomsRepo;
+import com.example.demo.subjects.Subject;
 import com.example.demo.teachers.Teacher;
 import com.example.demo.teachers.TeachersRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +32,7 @@ public class LessonsController {
     @GetMapping("/new")
     public String createLesson(
             @RequestParam(name = "group", required = false) Group group,
-            @RequestParam(name = "teacher", required = false) Teacher teacher,
+            @RequestParam(name = "subject", required = false) Subject subject,
             @RequestParam(name = "room", required = false) Room room,
             @RequestParam("day") int dayWeek,
             @RequestParam("pair") int pairNum,
@@ -41,7 +42,7 @@ public class LessonsController {
         model.addAttribute("title", "Новое занятие");
         model.addAttribute("back", backUrl);
 
-        fillModelForEdit(model, group, teacher, room, dayWeek, pairNum);
+        fillModelForEdit(model, group, subject, room, dayWeek, pairNum);
 
         return "lesson";
     }
@@ -61,7 +62,7 @@ public class LessonsController {
 
     @PostMapping("/save")
     public String save(
-            @RequestParam(name = "teacher", required = false) Teacher teacher,
+            @RequestParam(name = "subject", required = false) Subject subject,
             @RequestParam(name = "group", required = false) Group group,
             @RequestParam(name = "room", required = false) Room room,
             @RequestParam("day") int dayWeek,
@@ -71,9 +72,9 @@ public class LessonsController {
             Model model
 
     ) {
-        Lesson lesson = new Lesson(teacher, group, room, dayWeek, pairNum);
+        Lesson lesson = new Lesson(subject, group, room, dayWeek, pairNum);
 
-        ArrayList<Lesson> cross = lessonsRepo.findCross(teacher, group, room, dayWeek, pairNum, id);
+        ArrayList<Lesson> cross = lessonsRepo.findCross(subject, group, room, dayWeek, pairNum, id);
 
         if (cross.isEmpty()) {
             if (id != -1l) {
@@ -93,11 +94,11 @@ public class LessonsController {
         }
     }
 
-    private void fillModelForEdit(Model model, Group group, Teacher teacher, Room room, int dayWeek, int pairNum) {
+    private void fillModelForEdit(Model model, Group group, Subject subject, Room room, int dayWeek, int pairNum) {
         LessonHolder holder = new LessonHolder(dayWeek, pairNum);
 
         if (group != null) holder.setGroup(group.getId());
-        if (teacher != null) holder.setTeacher(teacher.getId());
+        if (subject != null) holder.setSubject(subject.getId());
         if (room != null) holder.setRoom(room.getId());
 
         fillModelForEdit(model, holder);

@@ -3,7 +3,7 @@ package com.example.demo.lessons;
 class LessonHolder {
     private Long id;
     private Long group;
-    private Long teacher;
+    private Long subject;
     private Long room;
     private int dayWeek;
     private int pairNum;
@@ -12,7 +12,7 @@ class LessonHolder {
         this(lesson.getDayWeek(), lesson.getPairNum());
         id = lesson.getId();
         group = lesson.getGroup().getId();
-        teacher = lesson.getTeacher().getId();
+        subject = lesson.getSubject().getId();
         room = lesson.getRoom().getId();
     }
 
@@ -37,12 +37,12 @@ class LessonHolder {
         this.group = group;
     }
 
-    public Long getTeacher() {
-        return teacher;
+    public Long getSubject() {
+        return subject;
     }
 
-    public void setTeacher(Long teacher) {
-        this.teacher = teacher;
+    public void setSubject(Long subject) {
+        this.subject = subject;
     }
 
     public Long getRoom() {

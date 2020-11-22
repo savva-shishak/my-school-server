@@ -7,6 +7,8 @@ import com.example.demo.teachers.Teacher;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "sbj")
@@ -21,13 +23,18 @@ public class Subject implements Model {
     private Teacher teacher;
 
     @OneToMany
-    private ArrayList<Group> groups;
+    private Set<Group> groups = new HashSet<>();
 
     public Subject() {
     }
 
     public Subject(String name) {
         this.name = name;
+    }
+
+    public Subject(String name, Teacher teacher) {
+        this.name = name;
+        this.teacher = teacher;
     }
 
     @Override
@@ -58,16 +65,21 @@ public class Subject implements Model {
         this.teacher = teacher;
     }
 
-    public ArrayList<Group> getGroups() {
+    public Set<Group> getGroups() {
         return groups;
     }
 
-    public void setGroups(ArrayList<Group> groups) {
+    public void setGroups(Set<Group> groups) {
         this.groups = groups;
     }
 
     @Override
     public String getLessonLabel(Lesson l) {
         return String.format("%s (%s)", l.getGroup(), l.getRoom());
+    }
+
+    @Override
+    public String toString() {
+        return name;
     }
 }

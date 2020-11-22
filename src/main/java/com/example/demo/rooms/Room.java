@@ -21,7 +21,7 @@ public class Room implements Model {
 
     @Override
     public String getLessonLabel(Lesson l) {
-        return String.format("%s %s", l.getGroup(), l.getTeacher());
+        return String.format("%s %s", l.getGroup(), l.getSubject());
     }
 
     public Room(String name) {

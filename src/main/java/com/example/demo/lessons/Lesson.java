@@ -2,6 +2,7 @@ package com.example.demo.lessons;
 
 import com.example.demo.groups.Group;
 import com.example.demo.rooms.Room;
+import com.example.demo.subjects.Subject;
 import com.example.demo.teachers.Teacher;
 
 import javax.persistence.*;
@@ -14,7 +15,7 @@ public class Lesson {
     private Long id;
 
     @ManyToOne
-    private Teacher teacher;
+    private Subject subject;
 
     @ManyToOne
     private Group group;
@@ -29,8 +30,8 @@ public class Lesson {
     public Lesson() {
     }
 
-    public Lesson(Teacher teacher, Group group, Room room, int dayWeek, int pairNum) {
-        this.teacher = teacher;
+    public Lesson(Subject subject, Group group, Room room, int dayWeek, int pairNum) {
+        this.subject = subject;
         this.group = group;
         this.room = room;
         this.dayWeek = dayWeek;
@@ -44,7 +45,7 @@ public class Lesson {
 
     @Override
     public String toString() {
-        return String.format("%s - %s (%s)", group.getName(), teacher.getName(), room.getName());
+        return String.format("%s - %s (%s)", group.getName(), subject.getName(), room.getName());
     }
 
     public String getLinkCreate(String entities, long id) {
@@ -84,12 +85,16 @@ public class Lesson {
         this.group = group;
     }
 
-    public Teacher getTeacher() {
-        return teacher;
+    public Subject getSubject() {
+        return subject;
     }
 
-    public void setTeacher(Teacher teacher) {
-        this.teacher = teacher;
+    public void setSubject(Subject subject) {
+        this.subject = subject;
+    }
+
+    public Teacher getTeacher() {
+        return subject.getTeacher();
     }
 
     public Room getRoom() {
