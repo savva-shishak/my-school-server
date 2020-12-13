@@ -4,9 +4,9 @@ import com.example.demo.abstractcrud.Model;
 import com.example.demo.groups.Group;
 import com.example.demo.lessons.Lesson;
 import com.example.demo.teachers.Teacher;
+import com.fasterxml.jackson.annotation.JsonView;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -15,14 +15,21 @@ import java.util.Set;
 public class Subject implements Model {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @JsonView(View.Cross.class)
     private Long id;
 
+    @JsonView(View.Cross.class)
     private String name;
 
+    @JsonView(View.Cross.class)
     @ManyToOne
     private Teacher teacher;
 
-    @OneToMany
+    @ManyToMany
+    @JoinTable(
+            name = "subjects_groups",
+            joinColumns = @JoinColumn(name = "subjects_id"),
+            inverseJoinColumns = @JoinColumn(name = "group_id"))
     private Set<Group> groups = new HashSet<>();
 
     public Subject() {

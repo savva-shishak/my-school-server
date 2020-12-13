@@ -24,7 +24,7 @@
                 <div class="form-group">
                     <label for="teachers">Предмет</label>
                     <select required class="form-control" name="teacher" id="teachers">
-                        <option value="" selected disabled hidden>Выбрать учителя</option>
+                        <option value="" selected disabled hidden>Выбрать предмет</option>
                         <option
                                 th:each="item : ${subjects}"
                                 th:value="${item.getId()}"

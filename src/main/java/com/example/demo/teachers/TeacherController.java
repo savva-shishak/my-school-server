@@ -19,7 +19,7 @@ public class TeacherController extends CrudController<Teacher, TeachersRepo> {
     }
 
     @Override
-    public void setEditPropsToModel(Model model, Teacher item) {
+    public void setInfoPropsToModel(Model model, Teacher item) {
         model.addAttribute("subjects", subjectsRepo.findByTeacher(item));
     }
 

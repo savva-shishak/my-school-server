@@ -5,27 +5,23 @@
     <title>Title</title>
 </head>
 <body>
-<div th:fragment="timetable" class="row">
+<div th:fragment="timetable" class="row timetable">
     <div th:each="day : ${week}" class="col-4">
-        <div th:class="${'card ' + name}">
+        <div class="card">
             <div class="card-body">
                 <div class="card-title" th:utext="${day.getName()}" />
                 <div class="card-text">
                     <div class="list-group">
-                        <div th:each="pair : ${day.getLessons()}" class="list-group-item">
+                        <div
+                                th:each="pair : ${day.getLessons()}"
+                                th:data-day="${pair.dayWeek}"
+                                th:data-pair="${pair.pairNum}"
+                                class="list-group-item list-group-item-action pair"
+                        >
                             <small>
                                 <span th:text="${pair.pairNum}" />
-                                <a
-                                        th:if="${pair.id}"
-                                        th:href="'/lessons/edit/' + ${pair.getId() + '?back=/' + name + '/' + instance.getId()}"
-                                        th:utext="${instance.getLessonLabel(pair)}"
-                                ></a>
-                                <a
-                                        th:unless="${pair.id}"
-                                        th:href="${pair.getLinkCreate(name, instance.getId())+ '&back=/' + name + '/' + instance.getId()}"
-                                >
-                                    Окно
-                                </a>
+                                <a th:if="${pair.id}" th:utext="${instance.getLessonLabel(pair)}"></a>
+                                <a th:unless="${pair.id}">Окно</a>
                             </small>
                         </div>
                     </div>

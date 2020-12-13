@@ -2,6 +2,8 @@ package com.example.demo.teachers;
 
 import com.example.demo.abstractcrud.Model;
 import com.example.demo.lessons.Lesson;
+import com.example.demo.subjects.View;
+import com.fasterxml.jackson.annotation.JsonView;
 
 import javax.persistence.*;
 
@@ -10,8 +12,10 @@ import javax.persistence.*;
 public class Teacher implements Model {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @JsonView(View.Cross.class)
     protected Long id;
 
+    @JsonView(View.Cross.class)
     protected String name;
 
     public Teacher() {

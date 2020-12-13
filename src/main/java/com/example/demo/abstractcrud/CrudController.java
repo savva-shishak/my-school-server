@@ -63,7 +63,7 @@ public abstract class CrudController<M extends com.example.demo.abstractcrud.Mod
         return "info";
     }
 
-    public void setEditPropsToModel(Model model, M item) { }
+    public void setInfoPropsToModel(Model model, M item) { }
 
     @GetMapping("/{id}")
     public String getEdit(
@@ -75,7 +75,7 @@ public abstract class CrudController<M extends com.example.demo.abstractcrud.Mod
         model.addAttribute("name", name);
         model.addAttribute("week", getWeek(item));
         model.addAttribute("instance", item);
-        setEditPropsToModel(model, item);
+        setInfoPropsToModel(model, item);
         return getInfoPage();
     }
 

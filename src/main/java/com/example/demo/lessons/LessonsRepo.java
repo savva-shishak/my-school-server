@@ -18,17 +18,20 @@ public interface LessonsRepo extends JpaRepository<Lesson, Long> {
     ArrayList<Lesson> findByGroup(Group group);
     ArrayList<Lesson> findByRoom(Room room);
 
-    @Query("FROM Lesson l WHERE " +
+    @Query("FROM Lesson l " +
+            "JOIN Subject s ON s = :subject " +
+            "WHERE " +
             "l.id <> :id AND " +
             "l.dayWeek = :day AND " +
             "l.pairNum = :pair AND " +
             "(" +
-                "l.subject = :subject OR " +
+                "l.subject.teacher = s.teacher OR " +
                 "l.group = :group OR " +
                 "l.room = :room" +
             ")")
     ArrayList<Lesson> findCross(
-            @Param("subject") Subject subject,
+            // @Param("subject")
+                    Subject subject,
             @Param("group") Group group,
             @Param("room") Room room,
             @Param("day") int dayWeek,

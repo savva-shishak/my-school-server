@@ -3,28 +3,37 @@ package com.example.demo.lessons;
 import com.example.demo.groups.Group;
 import com.example.demo.rooms.Room;
 import com.example.demo.subjects.Subject;
+import com.example.demo.subjects.View;
 import com.example.demo.teachers.Teacher;
+import com.fasterxml.jackson.annotation.JsonView;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name = "lsn")
 public class Lesson {
+
+    @JsonView(View.Cross.class)
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @JsonView(View.Cross.class)
     @ManyToOne
     private Subject subject;
 
+    @JsonView(View.Cross.class)
     @ManyToOne
     private Group group;
 
+    @JsonView(View.Cross.class)
     @ManyToOne
     private Room room;
 
+    @JsonView(View.Cross.class)
     private int dayWeek;
 
+    @JsonView(View.Cross.class)
     private int pairNum;
 
     public Lesson() {

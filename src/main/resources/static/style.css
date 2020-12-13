@@ -9,3 +9,7 @@
 .rooms {
     border: 2px solid orange;
 }
+
+.template {
+    display: none;
+}
