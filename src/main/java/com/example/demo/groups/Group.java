@@ -15,12 +15,13 @@ import java.util.Set;
 public class Group implements Model {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @JsonView(View.Cross.class)
+    @JsonView({View.Cross.class, VGroup.JustList.class})
     protected Long id;
 
-    @JsonView(View.Cross.class)
+    @JsonView({View.Cross.class, VGroup.JustList.class})
     protected String name;
 
+    @JsonView(VGroup.WidthSubjects.class)
     @ManyToMany(mappedBy = "groups")
     private Set<Subject> subjects = new HashSet<>();
 
