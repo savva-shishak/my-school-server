@@ -18,10 +18,13 @@ public class LessonsService {
     public ArrayList<Day> getBy(String nameModel, Model model) {
         switch (nameModel) {
             case "groups":
+            case "group":
                 return getWeek(repo.findByGroup((Group) model));
             case "teachers":
+            case "teacher":
                 return getWeek(repo.findByTeacher((Teacher) model));
             case "rooms":
+            case "room":
                 return getWeek(repo.findByRoom((Room) model));
             default:
                 throw new NoSelectEntityException(nameModel);

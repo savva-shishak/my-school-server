@@ -4,13 +4,14 @@ import com.example.demo.lessons.Lesson;
 import com.example.demo.lessons.LessonsRepo;
 import com.example.demo.subjects.Subject;
 import com.example.demo.subjects.SubjectsRepo;
-import com.example.demo.subjects.View;
 import com.fasterxml.jackson.annotation.JsonView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashSet;
+
 @RestController
-@RequestMapping("/api/groups")
+@RequestMapping("/api/my/groups")
 public class GroupRestController {
     @Autowired
     private GroupsRepos repos;
@@ -97,6 +98,14 @@ public class GroupRestController {
     public void delete(
             @PathVariable Group group
     ) {
+        for (Subject subject : group.getSubjects()) {
+            subject.getGroups().remove(group);
+            subjectsRepo.save(subject);
+        }
+
+        group.setSubjects(new HashSet<>());
+        repos.save(group);
+
         repos.delete(group);
     }
 

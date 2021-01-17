@@ -16,10 +16,10 @@ import java.util.Set;
 public class Subject implements Model {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @JsonView(View.Cross.class)
+    @JsonView({View.Cross.class, Model.class})
     private Long id;
 
-    @JsonView(View.Cross.class)
+    @JsonView({View.Cross.class, Model.class})
     private String name;
 
     @JsonView(View.Cross.class)
