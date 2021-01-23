@@ -38,4 +38,6 @@ public interface LessonsRepo extends JpaRepository<Lesson, Long> {
             @Param("pair") int pair,
             @Param("id") long id
     );
+
+    ArrayList<Lesson> findByGroupAndSubject(Group group, Subject subject);
 }

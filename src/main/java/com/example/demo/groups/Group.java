@@ -25,6 +25,9 @@ public class Group implements Model {
     @ManyToMany(mappedBy = "groups")
     private Set<Subject> subjects = new HashSet<>();
 
+    @OneToMany(mappedBy = "group", cascade = CascadeType.REMOVE)
+    private Set<Lesson> lessons;
+
     public Group() {
     }
 
@@ -59,6 +62,14 @@ public class Group implements Model {
 
     public void setSubjects(Set<Subject> subjects) {
         this.subjects = subjects;
+    }
+
+    public Set<Lesson> getLessons() {
+        return lessons;
+    }
+
+    public void setLessons(Set<Lesson> lessons) {
+        this.lessons = lessons;
     }
 
     @Override

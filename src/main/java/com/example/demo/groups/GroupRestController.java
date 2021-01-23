@@ -87,6 +87,10 @@ public class GroupRestController {
             @PathVariable("group") Group group,
             @PathVariable("subject") Subject subject
     ) {
+        for (Lesson l : lessonsRepo.findByGroupAndSubject(group, subject)) {
+            lessonsRepo.delete(l);
+        }
+
         group.getSubjects().removeIf(s -> s.getId().equals(subject.getId()));
         subject.getGroups().removeIf(g -> g.getId().equals(group.getId()));
 

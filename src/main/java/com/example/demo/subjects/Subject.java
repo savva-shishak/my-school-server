@@ -26,6 +26,7 @@ public class Subject implements Model {
     @ManyToOne
     private Teacher teacher;
 
+    @JsonView(View.WithGroups.class)
     @ManyToMany
     @JoinTable(
             name = "subjects_groups",
