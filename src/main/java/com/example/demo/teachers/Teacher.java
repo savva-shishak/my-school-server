@@ -2,10 +2,12 @@ package com.example.demo.teachers;
 
 import com.example.demo.abstractcrud.Model;
 import com.example.demo.lessons.Lesson;
+import com.example.demo.subjects.Subject;
 import com.example.demo.subjects.View;
 import com.fasterxml.jackson.annotation.JsonView;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table(name = "tchr")
@@ -17,6 +19,9 @@ public class Teacher implements Model {
 
     @JsonView(View.Cross.class)
     protected String name;
+
+    @OneToMany(mappedBy = "teacher", cascade = CascadeType.REMOVE)
+    private Set<Subject> subjects;
 
     public Teacher() {
     }

@@ -26,6 +26,9 @@ public class Subject implements Model {
     @ManyToOne
     private Teacher teacher;
 
+    @OneToMany(mappedBy = "subject", cascade = CascadeType.REMOVE)
+    private Set<Lesson> lessons;
+
     @JsonView(View.WithGroups.class)
     @ManyToMany
     @JoinTable(
