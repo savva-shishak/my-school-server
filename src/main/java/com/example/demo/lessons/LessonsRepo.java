@@ -26,13 +26,14 @@ public interface LessonsRepo extends JpaRepository<Lesson, Long> {
             "l.pairNum = :pair AND " +
             "(" +
                 "l.subject.teacher = s.teacher OR " +
-                "l.group = :group OR " +
+                "(l.group = :group AND (l.subGroup = :subgroup OR :subgroup = 0 OR l.subGroup = 0)) OR " +
                 "l.room = :room" +
             ")")
     ArrayList<Lesson> findCross(
             // @Param("subject")
                     Subject subject,
             @Param("group") Group group,
+            @Param("subgroup") int subGroup,
             @Param("room") Room room,
             @Param("day") int dayWeek,
             @Param("pair") int pair,

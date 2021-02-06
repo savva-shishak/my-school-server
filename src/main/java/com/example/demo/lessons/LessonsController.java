@@ -64,6 +64,7 @@ public class LessonsController {
     public String save(
             @RequestParam(name = "subject", required = false) Subject subject,
             @RequestParam(name = "group", required = false) Group group,
+            @RequestParam int subgroup,
             @RequestParam(name = "room", required = false) Room room,
             @RequestParam("day") int dayWeek,
             @RequestParam("pair") int pairNum,
@@ -72,9 +73,9 @@ public class LessonsController {
             Model model
 
     ) {
-        Lesson lesson = new Lesson(subject, group, room, dayWeek, pairNum);
+        Lesson lesson = new Lesson(subject, group, 0, room, dayWeek, pairNum);
 
-        ArrayList<Lesson> cross = lessonsRepo.findCross(subject, group, room, dayWeek, pairNum, id);
+        ArrayList<Lesson> cross = lessonsRepo.findCross(subject, group, subgroup, room, dayWeek, pairNum, id);
 
         if (cross.isEmpty()) {
             if (id != -1l) {

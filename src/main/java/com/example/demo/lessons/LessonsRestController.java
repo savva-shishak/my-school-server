@@ -34,11 +34,12 @@ public class LessonsRestController {
     public ArrayList<Lesson> getCross(
             @RequestParam Group group,
             @RequestParam Subject subject,
+            @RequestParam int subgroup,
             @RequestParam Room room,
             @RequestParam Integer dayWeek,
             @RequestParam Integer pairNum
     ) {
-        return repo.findCross(subject, group, room, dayWeek, pairNum, -1);
+        return repo.findCross(subject, group, subgroup, room, dayWeek, pairNum, -1);
     }
 
     @JsonView(View.Cross.class)
@@ -62,12 +63,13 @@ public class LessonsRestController {
     @GetMapping
     public void createLesson(
             @RequestParam Group group,
+            @RequestParam int subgroup,
             @RequestParam Subject subject,
             @RequestParam Room room,
             @RequestParam Integer dayWeek,
             @RequestParam Integer pairNum
     ) {
-        repo.save(new Lesson(subject, group, room, dayWeek, pairNum));
+        repo.save(new Lesson(subject, group, subgroup, room, dayWeek, pairNum));
     }
 
     @DeleteMapping("/{lesson}")

@@ -27,6 +27,9 @@ public class Lesson {
     private Group group;
 
     @JsonView(View.Cross.class)
+    private Integer subGroup;
+
+    @JsonView(View.Cross.class)
     @ManyToOne
     private Room room;
 
@@ -39,9 +42,10 @@ public class Lesson {
     public Lesson() {
     }
 
-    public Lesson(Subject subject, Group group, Room room, int dayWeek, int pairNum) {
+    public Lesson(Subject subject, Group group, Integer subGroup, Room room, int dayWeek, int pairNum) {
         this.subject = subject;
         this.group = group;
+        this.subGroup = subGroup;
         this.room = room;
         this.dayWeek = dayWeek;
         this.pairNum = pairNum;
@@ -112,5 +116,13 @@ public class Lesson {
 
     public void setRoom(Room room) {
         this.room = room;
+    }
+
+    public Integer getSubGroup() {
+        return subGroup;
+    }
+
+    public void setSubGroup(Integer subGroup) {
+        this.subGroup = subGroup;
     }
 }
