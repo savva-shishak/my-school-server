@@ -34,6 +34,9 @@ public class Lesson {
     private Room room;
 
     @JsonView(View.Cross.class)
+    private Integer week;
+
+    @JsonView(View.Cross.class)
     private int dayWeek;
 
     @JsonView(View.Cross.class)
@@ -42,11 +45,12 @@ public class Lesson {
     public Lesson() {
     }
 
-    public Lesson(Subject subject, Group group, Integer subGroup, Room room, int dayWeek, int pairNum) {
+    public Lesson(Subject subject, Group group, Integer subGroup, Room room, int week, int dayWeek, int pairNum) {
         this.subject = subject;
         this.group = group;
         this.subGroup = subGroup;
         this.room = room;
+        this.week = week;
         this.dayWeek = dayWeek;
         this.pairNum = pairNum;
     }
@@ -124,5 +128,13 @@ public class Lesson {
 
     public void setSubGroup(Integer subGroup) {
         this.subGroup = subGroup;
+    }
+
+    public Integer getWeek() {
+        return week;
+    }
+
+    public void setWeek(Integer week) {
+        this.week = week;
     }
 }

@@ -35,11 +35,12 @@ public class LessonsRestController {
             @RequestParam Group group,
             @RequestParam Subject subject,
             @RequestParam int subgroup,
+            @RequestParam int week,
             @RequestParam Room room,
             @RequestParam Integer dayWeek,
             @RequestParam Integer pairNum
     ) {
-        return repo.findCross(subject, group, subgroup, room, dayWeek, pairNum, -1);
+        return repo.findCross(subject, group, subgroup, room, week, dayWeek, pairNum, -1);
     }
 
     @JsonView(View.Cross.class)
@@ -64,12 +65,13 @@ public class LessonsRestController {
     public void createLesson(
             @RequestParam Group group,
             @RequestParam int subgroup,
+            @RequestParam int week,
             @RequestParam Subject subject,
             @RequestParam Room room,
             @RequestParam Integer dayWeek,
             @RequestParam Integer pairNum
     ) {
-        repo.save(new Lesson(subject, group, subgroup, room, dayWeek, pairNum));
+        repo.save(new Lesson(subject, group, subgroup, room, week, dayWeek, pairNum));
     }
 
     @DeleteMapping("/{lesson}")
