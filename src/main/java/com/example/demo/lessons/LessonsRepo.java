@@ -42,4 +42,6 @@ public interface LessonsRepo extends JpaRepository<Lesson, Long> {
     );
 
     ArrayList<Lesson> findByGroupAndSubject(Group group, Subject subject);
+
+    ArrayList<Lesson> findByDayWeekAndPairNum(int dayWeek, int pairNum);
 }

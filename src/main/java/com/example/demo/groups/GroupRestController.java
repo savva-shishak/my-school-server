@@ -8,7 +8,7 @@ import com.fasterxml.jackson.annotation.JsonView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashSet;
+import java.util.*;
 
 @RestController
 @RequestMapping("/api/my/groups")
@@ -111,6 +111,22 @@ public class GroupRestController {
         repos.save(group);
 
         repos.delete(group);
+    }
+
+    @GetMapping("/free")
+    public List<Group> free(
+            @RequestParam Integer dayWeek,
+            @RequestParam Integer pairNum
+    ) {
+        ArrayList<Lesson> lessons = lessonsRepo.findByDayWeekAndPairNum(dayWeek, pairNum);
+
+        List<Group> groups = repos.findAll();
+
+        for (Lesson lesson : lessons) {
+            groups.removeIf(group -> !lesson.getGroup().id.equals(group.id));
+        }
+
+        return  groups;
     }
 
     class GroupWithLessons {
